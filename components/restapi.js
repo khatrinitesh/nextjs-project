@@ -1,5 +1,6 @@
 import React ,{useState,useEffect } from 'react';
 import Link from 'next/link';
+import styles from  '../styles/tablestylin.module.css';
 
 const RestApiPagination = () => {
     const [data, setData] = useState([]);
@@ -44,9 +45,9 @@ const RestApiPagination = () => {
     }
   
     return (
-      <ul className='list-group mb-4'>
+      <ul className={styles.list_group}>
         {players.map(player => (
-          <li key={player.id} className='list-group-item'>
+          <li key={player.id} className='list_group_item'>
             {player.title}
           </li>
         ))}
@@ -63,10 +64,10 @@ const RestApiPagination = () => {
   
     return (
       <nav>
-        <ul className='pagination'>
+        <ul className={styles.list_custom}>
           {pageNumbers.map(number => (
-            <li key={number} className='page-item'>
-              <Link onClick={() => paginate(number)} href='' className='page-link'>
+            <li key={number} className={styles.list_page}>
+              <Link onClick={() => paginate(number)} href='javascript:;' className={styles.listpagelink}>
                 {number}
               </Link>
             </li>
