@@ -1,10 +1,10 @@
 import React,{useState} from 'react';
-import PlayersScreen from '../components/restapi';
+import RestApiPagination from '../components/restapi';
 
 export default function CustomRestApi() {
   return (
     <div>
-      <PlayersScreen/>
+      <RestApiPagination/>
     </div>
   )
 }

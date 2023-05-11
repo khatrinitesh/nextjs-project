@@ -1,9 +1,10 @@
 import React ,{useState,useEffect } from 'react';
+import Link from 'next/link';
 
-const PlayersScreen = () => {
+const RestApiPagination = () => {
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [playersPerPage] = useState(10);
+    const [everyPerPage] = useState(10);
     const [loading, setLoading] = useState(true);
   
     useEffect(() => {
@@ -17,8 +18,8 @@ const PlayersScreen = () => {
     }, []);
   
     // Get current players
-    const indexOfLastPlayer = currentPage * playersPerPage;
-    const indexOfFirstPlayer = indexOfLastPlayer - playersPerPage;
+    const indexOfLastPlayer = currentPage * everyPerPage;
+    const indexOfFirstPlayer = indexOfLastPlayer - everyPerPage;
     const currentPlayers = data.slice(indexOfFirstPlayer, indexOfLastPlayer);
   
     // Change page
@@ -26,18 +27,18 @@ const PlayersScreen = () => {
   
     return (
       <div className='container mt-5'>
-        <h1 className='text-primary mb-3'>My Players</h1>
-        <Players players={currentPlayers} loading={loading} />
+        <h1 className='text-primary mb-3'>Rest API and Pagination</h1>
+        <CustomExample players={currentPlayers} loading={loading} />
         <Pagination
-          playersPerPage={playersPerPage}
-          totalPlayers={data.length}
+          everyPerPage={everyPerPage}
+          totalPages={data.length}
           paginate={paginate}
         />
       </div>
     );
   }
   
-  const Players = ({ players, loading }) => {
+  const CustomExample = ({ players, loading }) => {
     if (loading) {
       return <h2>Loading...</h2>;
     }
@@ -53,10 +54,10 @@ const PlayersScreen = () => {
     );
   }
   
-  const Pagination = ({ playersPerPage, totalPlayers, paginate }) => {
+  const Pagination = ({ everyPerPage, totalPages, paginate }) => {
     const pageNumbers = [];
   
-    for (let i = 1; i <= Math.ceil(totalPlayers / playersPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(totalPages / everyPerPage); i++) {
       pageNumbers.push(i);
     }
   
@@ -65,9 +66,9 @@ const PlayersScreen = () => {
         <ul className='pagination'>
           {pageNumbers.map(number => (
             <li key={number} className='page-item'>
-              <a onClick={() => paginate(number)} href='javascript:void(0)' className='page-link'>
+              <Link onClick={() => paginate(number)} href='' className='page-link'>
                 {number}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -75,4 +76,4 @@ const PlayersScreen = () => {
     );
   }
 
-  export default PlayersScreen;
+  export default RestApiPagination;
